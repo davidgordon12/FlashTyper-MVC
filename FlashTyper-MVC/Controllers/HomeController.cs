@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
-using FlashTyperLibrary;
 
 namespace FlashTyper_MVC.Controllers
 {
@@ -27,15 +26,6 @@ namespace FlashTyper_MVC.Controllers
 
         public IActionResult Account()
         {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Index(string text, string input)
-        {
-
-            ViewBag.WPM = Calculate.WPM("demo");
-
             return View();
         }
 

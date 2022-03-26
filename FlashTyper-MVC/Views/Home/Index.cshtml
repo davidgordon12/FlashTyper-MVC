@@ -14,18 +14,14 @@
     #wordsToType {
         font-size: large;
     }
-
 </style>
 
-<form method="post" asp-controller="Home" asp-action="Index">
-    <div class="text-center">
-        <h1 class="display-4 text-light font-weight-bold">FlashTyper</h1>
-        <p class="mx-auto w-50 align-content-center  text-white-50 m-5" id="wordsToType"> Ipsem lorem Ipsem lorem Ipsem lorem Ipsem lorem Ipsem lorem Ipsem lorem Ipsem lorem </p>
-        <button onclick="window.location.reload()" class="bg-secondary text-white-50 m-5 border-0 text-primary">reset</button>
-        <input type="text" class="text-decoration-none bg-secondary text-white-50 m-5 border-0 text-primary" id="txtInput" autocomplete="off" placeholder="Type to start..." />
-        <button type="submit" class="bg-secondary text-white-50 m-5 border-0 text-primary">start</button>
-        <p class="text-white-50" id="timer"> 00:000 </p>
-        <h5 class="text-white-50" id="wpm">@ViewBag.WPM</h5>
-    </div>
-</form>
+<div class="text-center">
+    <h1 class="display-4 text-light font-weight-bold">FlashTyper</h1>
+    <p class="mx-auto w-50 align-content-center  text-white-50 m-5" id="wordsToType"> Ipsem lorem Ipsem lorem Ipsem lorem Ipsem lorem Ipsem lorem Ipsem lorem Ipsem lorem </p>
+    <input onkeydown="update()" type="text" class="text-decoration-none bg-secondary text-white-50 m-5 border-0 text-primary" id="txtInput" autocomplete="off" placeholder="Type to start..." />
+    <button onclick="reset()" class="bg-secondary text-white-50 m-5 border-0 text-primary">reset</button>
+    <p class="text-white-50" id="timer"> 20 </p>
+    <h5 class="text-white-50" id="wpm"> </h5>
+</div>
 

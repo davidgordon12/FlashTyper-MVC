@@ -21,11 +21,19 @@ namespace FlashTyper_MVC.Controllers
 
         public IActionResult Leaderboards()
         {
+            //list of username - wpm
             return View();
         }
 
         public IActionResult Account()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Account(string username, string password)
+        {
+            //temporary paramaters
             return View();
         }
 

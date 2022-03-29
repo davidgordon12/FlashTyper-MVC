@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
+using FlashTyperLibrary;
 
 namespace FlashTyper_MVC.Controllers
 {
@@ -31,9 +32,9 @@ namespace FlashTyper_MVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult Account(string username, string password)
+        public IActionResult Account(string name)
         {
-            //temporary paramaters
+            _logger.LogInformation("Account created");
             return View();
         }
 

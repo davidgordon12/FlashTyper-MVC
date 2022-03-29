@@ -1,9 +1,8 @@
-﻿var timerLabel = document.getElementById('timer');
+﻿/* 
+var timerLabel = document.getElementById('timer');
 var wordsToType = document.getElementById('wordsToType');
-var input = document.getElementById('txtInput');
 var seconds = 20;
 var running = false;
-var wpm;
 
 function update() {
     if (!running) {
@@ -12,7 +11,8 @@ function update() {
             timerLabel.textContent = seconds--;
 
             if (seconds == -2) {
-                wpm = input.(textContent.length / 5) / 0.2;
+                let input = document.getElementById('txtInput');
+                var wpm = input.textContent.length;
 
                 wordsToType.textContent = "Game Over - " + wpm + "WPM";
 
@@ -20,6 +20,8 @@ function update() {
                 seconds = 20;
                 timerLabel.textContent = seconds;
                 running = false;
+
+                alert(input.innerText.length);
             }
 
         }, 1000);
@@ -45,7 +47,10 @@ function loadWords() {
 
 }
 
-
+function gameOver()
+{
+    
+}
 
 const words =
     [
@@ -65,3 +70,5 @@ const words =
         "harvest", "poetry", "approach", "network", "diplomatic", "safari",
         "tank", "do", "dine", "wife", "lobby", "registration", "divinity"
     ]
+
+*/

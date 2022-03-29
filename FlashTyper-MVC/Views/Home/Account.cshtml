@@ -1,6 +1,41 @@
-﻿@page
+﻿@model FlashTyper_MVC.Models.UserModel
 
-<div class="text-center">
-    <h1 class="display-4 text-light font-weight-bold">Account</h1>
-    <p class="mx-auto w-50 align-content-center  text-white-50 m-5">Coming soon!</p>
+@{
+    ViewData["Title"] = "View";
+}
+
+<style>
+    #accountForm {
+        margin-left: auto;
+        margin-right: auto;
+
+        display: block;
+    }
+</style>
+
+<div id="accountForm" class="w-25 text-center">
+    <form asp-action="View">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Username" class="mx-auto w-50 align-content-center text-white-50"></label>
+            <input asp-for="Username" autocomplete="off" class="form-control bg-dark text-white" />
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password" class="mx-auto w-50 align-content-center text-white-50"></label>
+            <input asp-for="Password" autocomplete="off" class="form-control bg-dark text-white" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ConfirmPassword" class="mx-auto w-50 align-content-center text-white-50"></label>
+            <input asp-for="ConfirmPassword" autocomplete="off" class="form-control bg-dark text-white" />
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-dark" />
+        </div>
+    </form>
 </div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

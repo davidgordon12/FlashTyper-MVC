@@ -29,7 +29,6 @@ namespace FlashTyper_MVC.Controllers
                 ViewBag.errorMessage = "This username is already taken";
                 return View();
             }
-            
         }
     }
 }

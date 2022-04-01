@@ -27,15 +27,16 @@ namespace FlashTyperLibrary.Logic
                 adapter.InsertCommand.ExecuteNonQuery();
 
                 command.Dispose();
+                context.cnn.Close();
 
                 return true;
             }
             catch (SqlException)
             {
+                context.cnn.Close();
+
                 return false;
             }
-
-            context.cnn.Close();
         }
 
         /// <summary>

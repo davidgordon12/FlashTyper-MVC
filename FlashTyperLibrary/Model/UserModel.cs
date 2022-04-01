@@ -1,5 +1,3 @@
-﻿using System;
-
 namespace FlashTyperLibrary.Model
 {
     public class UserModel

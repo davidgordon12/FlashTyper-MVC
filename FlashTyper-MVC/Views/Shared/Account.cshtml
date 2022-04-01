@@ -25,6 +25,7 @@
                 <label asp-for="Username" class="mx-auto w-50 align-content-center text-white-50"></label>
                 <input asp-for="Username" autocomplete="off" class="form-control bg-dark text-white" />
                 <span asp-validation-for="Username" class="text-danger"></span>
+                <span class="text-danger">@ViewBag.errorMessage</span>
             </div>
             <div class="form-group">
                 <label asp-for="Password" class="mx-auto w-50 align-content-center text-white-50"></label>

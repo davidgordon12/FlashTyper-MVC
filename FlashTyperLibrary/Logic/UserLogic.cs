@@ -10,7 +10,7 @@ namespace FlashTyperLibrary.Logic
         /// <summary>
         /// Inserts the user into the database with the given username and password from the account creation form
         /// </summary>
-        /// <param name="name">username to be inserted</param>
+        /// <param name="username">username to be inserted</param>
         /// <param name="password">password to be hashed, then inserted</param>
         public static bool AddUser(string username, string password)
         {

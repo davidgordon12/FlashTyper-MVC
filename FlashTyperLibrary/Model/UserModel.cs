@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace FlashTyperLibrary.Model
 {
-    class User
-    {
-        public int Id { get; set; }
+    public class UserModel
+    {   
         public string Username { get; set; }
-        public string Password { get; set; }
+        public int WPM { get; set; } = 0;
     }
 }

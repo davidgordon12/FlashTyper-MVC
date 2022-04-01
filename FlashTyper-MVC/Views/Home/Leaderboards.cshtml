@@ -1,9 +1,20 @@
-﻿@page
-@model FlashTyper_WEB.Pages.LeaderboardsModel
-@{
-}
+﻿@model IEnumerable<FlashTyperLibrary.Model.UserModel>
 
-<div class="text-center">
-    <h1 class="display-4 text-light font-weight-bold">Leaderboards</h1>
-    <p class="mx-auto w-50 align-content-center  text-white-50 m-5">Coming soon!</p>
-</div>
+<h1 class="text-center display-4 text-light font-weight-bold">Leaderboards</h1>
+<table id="tableLB" class="table table-striped table-dark">
+    <tr>
+        <th>USERNAME</th>
+        <th>WPM</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WPM)
+            </td>
+        </tr>
+    }
+</table>

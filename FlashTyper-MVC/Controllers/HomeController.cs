@@ -1,8 +1,9 @@
 ﻿using FlashTyper_MVC.Models;
+using FlashTyperLibrary.Logic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 using System.Diagnostics;
-using FlashTyperLibrary;
 
 namespace FlashTyper_MVC.Controllers
 {
@@ -22,19 +23,14 @@ namespace FlashTyper_MVC.Controllers
 
         public IActionResult Leaderboards()
         {
-            //list of username - wpm
-            return View();
+            //Get the current top 5 users with highest WPM
+            List<FlashTyperLibrary.Model.UserModel> leaderboard = UserLogic.GetLeaderboard();
+
+            return View(leaderboard);
         }
 
         public IActionResult Account()
         {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Account(string name)
-        {
-            _logger.LogInformation("Account created");
             return View();
         }
 

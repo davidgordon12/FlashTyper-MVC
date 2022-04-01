@@ -15,7 +15,6 @@ namespace FlashTyper_MVC.Models
 
         [Display(Name = "Password")]
         [Required(ErrorMessage = "Please provide a valid password")]
-        [StringLength(100, MinimumLength = 10, ErrorMessage = "Password must be between 10 and 100 characters.")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

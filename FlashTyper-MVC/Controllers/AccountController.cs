@@ -18,10 +18,18 @@ namespace FlashTyper_MVC.Controllers
         [HttpPost]
         public IActionResult Account(UserModel user)
         {
-            UserLogic.AddUser(user.Username, user.Password);
-            _logger.LogInformation($"New user '{user.Username}' created at {DateTime.Now}");
-
-            return View("Index");
+            if(UserLogic.AddUser(user.Username, user.Password))
+            {
+                ViewBag.errorMessage = null;
+                _logger.LogInformation($"New user '{user.Username} created at {DateTime.Now}");
+                return View("Index");
+            }
+            else
+            {
+                ViewBag.errorMessage = "This username is already taken";
+                return View();
+            }
+            
         }
     }
 }

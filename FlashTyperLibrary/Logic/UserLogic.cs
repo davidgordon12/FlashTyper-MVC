@@ -12,19 +12,29 @@ namespace FlashTyperLibrary.Logic
         /// </summary>
         /// <param name="name">username to be inserted</param>
         /// <param name="password">password to be hashed, then inserted</param>
-        public static void AddUser(string username, string password)
+        public static bool AddUser(string username, string password)
         {
             FlashTyperContext context = new();
             SqlDataAdapter adapter = new();
             
             context.cnn.Open();
 
-            SqlCommand command = new($"INSERT INTO FlashTyperUsers (username, password) VALUES ('{username}', '{password}')", context.cnn);
+            try
+            {
+                SqlCommand command = new($"INSERT INTO FlashTyperUsers (username, password) VALUES ('{username}', '{password}')", context.cnn);
 
-            adapter.InsertCommand = command;
-            adapter.InsertCommand.ExecuteNonQuery();
+                adapter.InsertCommand = command;
+                adapter.InsertCommand.ExecuteNonQuery();
 
-            command.Dispose();
+                command.Dispose();
+
+                return true;
+            }
+            catch (SqlException)
+            {
+                return false;
+            }
+
             context.cnn.Close();
         }
 

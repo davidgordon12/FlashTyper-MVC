@@ -25,7 +25,7 @@
                 <label asp-for="Username" class="mx-auto w-50 align-content-center text-white-50"></label>
                 <input asp-for="Username" autocomplete="off" class="form-control bg-dark text-white" />
                 <span asp-validation-for="Username" class="text-danger"></span>
-                <span class="text-danger">@ViewBag.errorMessage</span>
+                <span class="text-danger">@ViewBag.signupError</span>
             </div>
             <div class="form-group">
                 <label asp-for="Password" class="mx-auto w-50 align-content-center text-white-50"></label>
@@ -43,8 +43,9 @@
         </form>
     </div>
     <div id="login" class="w-25 text-center">
-        <form method="post">
+        <form method="post" asp-controller="Account" asp-action="Login">
             <div class="form-group">
+                <span class="text-danger">@ViewBag.loginError</span>
                 <label asp-for="Username" class="mx-auto w-50 align-content-center text-white-50"></label>
                 <input asp-for="Username" autocomplete="off" class="form-control bg-dark text-white" />
             </div>

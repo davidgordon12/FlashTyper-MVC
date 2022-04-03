@@ -16,12 +16,14 @@ namespace FlashTyperLibrary.Logic
         {
             FlashTyperContext context = new();
             SqlDataAdapter adapter = new();
-            
+
+            string _password = Hash.HashPassword(password);
+
             context.cnn.Open();
 
             try
             {
-                SqlCommand command = new($"INSERT INTO FlashTyperUsers (username, password) VALUES ('{username}', '{password}')", context.cnn);
+                SqlCommand command = new($"INSERT INTO FlashTyperUsers (username, password) VALUES ('{username}', '{_password}')", context.cnn);
 
                 adapter.InsertCommand = command;
                 adapter.InsertCommand.ExecuteNonQuery();
@@ -69,6 +71,37 @@ namespace FlashTyperLibrary.Logic
             context.cnn.Close();
 
             return users;
+        }
+
+        public static bool ValidLogin(string username, string password)
+        {
+            FlashTyperContext context = new();
+            SqlDataReader dataReader;
+
+            string _password = Hash.HashPassword(password);
+
+            context.cnn.Open();
+
+            SqlCommand command = new($"SELECT username, password FROM FlashTyperUsers WHERE username = '{username}' AND password = '{_password}';", context.cnn);
+
+            dataReader = command.ExecuteReader();
+
+            while(dataReader.Read())
+            {
+                if (dataReader.GetString(0) == username && dataReader.GetString(1) == _password)
+                {
+                    return true;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            
+            command.Dispose();
+            context.cnn.Close();
+
+            return false;
         }
     }
 }

@@ -21,13 +21,32 @@ namespace FlashTyper_MVC.Controllers
             if(UserLogic.AddUser(user.Username, user.Password))
             {
                 ViewBag.errorMessage = null;
-                _logger.LogInformation($"New user '{user.Username} created at {DateTime.Now}");
+                _logger.LogInformation($"New user '{user.Username}' created at {DateTime.Now}");
+
                 return View("Index");
             }
             else
             {
-                ViewBag.errorMessage = "This username is already taken";
+                ViewBag.signupError = "This username is already taken";
+
                 return View();
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Login(UserModel user)
+        {
+            if (UserLogic.ValidLogin(user.Username, user.Password))
+            {
+                _logger.LogInformation($"User '{user.Username}' logged in at {DateTime.Now}");
+
+                return View("Index");
+            }
+            else
+            {
+                ViewBag.loginError = "Incorrect username and/or password";
+
+                return View("Account");
             }
         }
     }

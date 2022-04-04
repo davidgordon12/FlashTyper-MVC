@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /FlashTyperLibrary/Data/FlashTyperContext.cs
 /FlashTyperLibrary/Logic/Hash.cs
+/FlashTyperLibrary/Hash.cs

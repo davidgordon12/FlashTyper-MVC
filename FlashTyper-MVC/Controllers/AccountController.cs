@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using FlashTyperLibrary.Logic;
 using Microsoft.Extensions.Logging;
 using System;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace FlashTyper_MVC.Controllers
 {
@@ -39,6 +41,8 @@ namespace FlashTyper_MVC.Controllers
             if (UserLogic.ValidLogin(user.Username, user.Password))
             {
                 _logger.LogInformation($"User '{user.Username}' logged in at {DateTime.Now}");
+
+                HttpContext.Session.SetString("UserSession", JsonConvert.SerializeObject(user));
 
                 return View("Index");
             }

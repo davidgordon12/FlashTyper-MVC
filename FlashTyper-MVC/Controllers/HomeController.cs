@@ -1,5 +1,6 @@
 ﻿using FlashTyper_MVC.Models;
 using FlashTyperLibrary.Logic;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
@@ -9,13 +10,6 @@ namespace FlashTyper_MVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
         public IActionResult Index()
         {
             return View();
@@ -31,7 +25,9 @@ namespace FlashTyper_MVC.Controllers
 
         public IActionResult Account()
         {
-            return View();
+            HttpContext.Session.GetString("UserSession");
+
+            return View("Account");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

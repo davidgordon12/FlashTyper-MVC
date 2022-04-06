@@ -20,10 +20,10 @@ namespace FlashTyper_MVC.Controllers
         [HttpPost]
         public IActionResult Account(UserModel user)
         {
-            if(UserLogic.AddUser(user.Username, user.Password))
+            if (UserLogic.AddUser(user.Username, user.Password))
             {
                 ViewBag.errorMessage = null;
-                _logger.LogInformation($"New user '{user.Username}' created at {DateTime.Now}");
+                _logger.LogInformation("New user '{0}' created at {1}", user.Username, DateTime.Now);
 
                 return View("Index");
             }
@@ -40,7 +40,7 @@ namespace FlashTyper_MVC.Controllers
         {
             if (UserLogic.ValidLogin(user.Username, user.Password))
             {
-                _logger.LogInformation($"User '{user.Username}' logged in at {DateTime.Now}");
+                _logger.LogInformation("User '{0}' logged in at {1}", user.Username, DateTime.Now);
 
                 HttpContext.Session.SetString("UserSession", JsonConvert.SerializeObject(user));
 
@@ -52,6 +52,14 @@ namespace FlashTyper_MVC.Controllers
 
                 return View("Account");
             }
+        }
+
+        [HttpPost]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+
+            return View("Index");
         }
     }
 }

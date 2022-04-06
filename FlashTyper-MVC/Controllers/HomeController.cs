@@ -2,9 +2,11 @@
 using FlashTyperLibrary.Logic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using FlashTyperLibrary.Model;
 
 namespace FlashTyper_MVC.Controllers
 {
@@ -25,9 +27,21 @@ namespace FlashTyper_MVC.Controllers
 
         public IActionResult Account()
         {
-            HttpContext.Session.GetString("UserSession");
+            try
+            {
+                var user = JsonConvert.DeserializeObject<FlashTyper_MVC.Models.UserModel>(HttpContext.Session.GetString("UserSession"));
 
-            return View("Account");
+                FlashTyperLibrary.Model.UserModel userModel = new FlashTyperLibrary.Model.UserModel { Username = user.Username, WPM = UserLogic.GetWPM(user.Username) };
+
+                ViewBag.Username = string.Empty;
+                ViewBag.Username = user.Username;
+
+                return View("Profile", userModel);
+            }
+            catch(ArgumentNullException)
+            {
+                return View("Account");
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

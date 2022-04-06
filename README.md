@@ -1,0 +1,9 @@
+# FlashTyper-MVC
+ASP.NET Version of my typeracer clone, FlashTyper, featuring leaderboards and profiles.
+
+## What I learned
+- Using regular SQL statements for data access
+- Account Creation
+- HTTP Sessions
+- Bootstrap
+- Logging

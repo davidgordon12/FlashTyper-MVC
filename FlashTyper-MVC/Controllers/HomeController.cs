@@ -31,9 +31,8 @@ namespace FlashTyper_MVC.Controllers
             {
                 var user = JsonConvert.DeserializeObject<FlashTyper_MVC.Models.UserModel>(HttpContext.Session.GetString("UserSession"));
 
-                FlashTyperLibrary.Model.UserModel userModel = new FlashTyperLibrary.Model.UserModel { Username = user.Username, WPM = UserLogic.GetWPM(user.Username) };
+                FlashTyperLibrary.Model.UserModel userModel = new() { Username = user.Username, WPM = UserLogic.GetWPM(user.Username) };
 
-                ViewBag.Username = string.Empty;
                 ViewBag.Username = user.Username;
 
                 return View("Profile", userModel);

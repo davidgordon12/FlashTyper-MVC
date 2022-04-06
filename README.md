@@ -1,4 +1,4 @@
-# FlashTyper-MVC
+# FlashTyper-MVC [WIP]
 ASP.NET version of my typeracer clone, FlashTyper, featuring leaderboards and profiles.
 
 ## What I learned

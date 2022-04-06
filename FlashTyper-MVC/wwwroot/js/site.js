@@ -1,5 +1,4 @@
-﻿/* 
-var timerLabel = document.getElementById('timer');
+﻿var timerLabel = document.getElementById('timer');
 var wordsToType = document.getElementById('wordsToType');
 var seconds = 20;
 var running = false;
@@ -21,7 +20,7 @@ function update() {
                 timerLabel.textContent = seconds;
                 running = false;
 
-                alert(input.innerText.length);
+                document.getElementById("gameForm").submit();
             }
 
         }, 1000);
@@ -70,5 +69,3 @@ const words =
         "harvest", "poetry", "approach", "network", "diplomatic", "safari",
         "tank", "do", "dine", "wife", "lobby", "registration", "divinity"
     ]
-
-*/

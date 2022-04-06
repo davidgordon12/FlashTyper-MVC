@@ -6,7 +6,6 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using FlashTyperLibrary.Model;
 
 namespace FlashTyper_MVC.Controllers
 {
@@ -41,6 +40,11 @@ namespace FlashTyper_MVC.Controllers
             {
                 return View("Account");
             }
+        }
+
+        public IActionResult Submit()
+        {
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

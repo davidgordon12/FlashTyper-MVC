@@ -1,5 +1,5 @@
 # FlashTyper-MVC
-ASP.NET Version of my typeracer clone, FlashTyper, featuring leaderboards and profiles.
+ASP.NET version of my typeracer clone, FlashTyper, featuring leaderboards and profiles.
 
 ## What I learned
 - Using regular SQL statements for data access

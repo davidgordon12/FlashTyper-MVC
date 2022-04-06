@@ -104,5 +104,29 @@ namespace FlashTyperLibrary.Logic
 
             return false;
         }
+
+        public static int GetWPM(string username)
+        {
+            int wpm = 0;
+
+            FlashTyperContext context = new();
+            SqlDataReader dataReader;
+
+            context.cnn.Open();
+
+            SqlCommand command = new($"SELECT wpm FROM FlashTyperUsers WHERE username = '{username}';", context.cnn);
+
+            dataReader = command.ExecuteReader();
+
+            while (dataReader.Read())
+            {
+                wpm = dataReader.GetInt32(0);
+            }
+
+            command.Dispose();
+            context.cnn.Close();
+
+            return wpm;
+        }
     }
 }

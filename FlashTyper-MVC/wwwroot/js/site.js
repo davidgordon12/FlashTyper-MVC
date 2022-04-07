@@ -9,15 +9,11 @@ function update() {
         const timer = setInterval(function () {
             timerLabel.textContent = seconds--;
 
-            if (seconds == -2) {
-                let input = document.getElementById('txtInput');
-                var wpm = input.textContent.length;
-
-                wordsToType.textContent = "Game Over - " + wpm + "WPM";
-
+            if (seconds == -1) {
                 clearInterval(timer);
                 seconds = 20;
-                timerLabel.textContent = seconds;
+
+                reset();
                 running = false;
 
                 document.getElementById("gameForm").submit();
@@ -37,11 +33,11 @@ function reset() {
 }
 
 function loadWords() {
-    wordsToType.textContent = null;
+    wordsToType.value = null
 
     for (let i = 0; i < 50; i++)
     {
-        wordsToType.textContent += words[Math.floor(Math.random() * 101)] + " ";
+        wordsToType.value += words[Math.floor(Math.random() * 101)] + " ";
     }
 
 }

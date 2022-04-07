@@ -1,9 +1,7 @@
-﻿@{
-    ViewData["Title"] = "Home page";
-}
+﻿@model GameModel
 
 <style type="text/css">
-    #txtInput:focus {
+    input:focus {
         outline: none;
     }
 
@@ -12,17 +10,18 @@
     }
 
     #wordsToType {
-        font-size: large;
+        width: 100%;
     }
 </style>
 
 <form id="gameForm" method="post" asp-action="Submit" asp-controller="Home">
     <div class="text-center">
         <h1 class="display-4 text-light font-weight-bold">FlashTyper</h1>
-        <p class="mx-auto w-50 align-content-center  text-white-50 m-5" id="wordsToType"> Ipsem lorem Ipsem lorem Ipsem lorem Ipsem lorem Ipsem lorem Ipsem lorem Ipsem lorem </p>
-        <input onkeydown="update()" type="text" class="text-decoration-none bg-secondary text-white-50 m-5 border-0 text-primary" id="txtInput" autocomplete="off" placeholder="Type to start..." />
+        <input asp-for="words" readonly="readonly" class="text-decoration-none bg-secondary text-white-50 m-5 border-0 text-primary" id="wordsToType" />
+        <br />
+        <input asp-for="input" onkeydown="update()" type="text" class="text-decoration-none bg-secondary text-white-50 m-5 border-0 text-primary" id="txtInput" autocomplete="off" placeholder="Type to start..." />
         <button onclick="window.location.reload()" type="reset" class="bg-secondary text-white-50 m-5 border-0 text-primary">reset</button>
         <p class="text-white-50" id="timer"> 20 </p>
-        <h5 class="text-white-50" id="wpm"> </h5>
+        <h5 class="text-white-50" id="wpm">@ViewBag.WPM WPM</h5>
     </div>
 </form>

@@ -25,8 +25,6 @@ function update() {
     }
 }
 
-
-
 function reset() {
     seconds = 20;
     timerLabel.textContent = seconds;
@@ -42,11 +40,6 @@ function loadWords() {
         wordsToType.value += words[Math.floor(Math.random() * 99)] + " ";
     }
 
-}
-
-function gameOver()
-{
-    
 }
 
 const words =

@@ -2,6 +2,7 @@
 using FlashTyperLibrary.Logic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,13 @@ namespace FlashTyper_MVC.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ILogger<HomeController> _logger;
+
+        public HomeController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -42,9 +50,24 @@ namespace FlashTyper_MVC.Controllers
             }
         }
 
-        public IActionResult Submit()
+        [HttpPost]
+        public IActionResult Submit(GameModel gameModel)
         {
-            return View();
+            int wpm = GameLogic.CalculateWPM(gameModel.input);
+            ViewBag.WPM = wpm;
+
+            try
+            {
+                var user = JsonConvert.DeserializeObject<FlashTyper_MVC.Models.UserModel>(HttpContext.Session.GetString("UserSession"));
+
+                GameLogic.UpdateWPM(user.Username, wpm);
+
+                return View("Index");
+            }
+            catch(ArgumentNullException)
+            { 
+                return View("Index"); 
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

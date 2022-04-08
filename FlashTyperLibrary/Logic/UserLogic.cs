@@ -21,18 +21,18 @@ namespace FlashTyperLibrary.Logic
 
                 string _password = Hash.HashPassword(password);
 
-                context.cnn.Open();
+                context.Cnn.Open();
 
                 SqlCommand command = new(
                     "INSERT INTO FlashTyperUsers (username, password) " +
                     $"VALUES ('{username}', '{_password}')", 
-                    context.cnn);
+                    context.Cnn);
 
                 adapter.InsertCommand = command;
                 adapter.InsertCommand.ExecuteNonQuery();
 
                 command.Dispose();
-                context.cnn.Close();
+                context.Cnn.Close();
 
                 return true;
             }
@@ -53,9 +53,9 @@ namespace FlashTyperLibrary.Logic
             FlashTyperContext context = new();
             SqlDataReader dataReader;
 
-            context.cnn.Open();
+            context.Cnn.Open();
 
-            SqlCommand command = new($"SELECT TOP 5 username, wpm, accuracy FROM FlashTyperUsers ORDER BY wpm DESC;", context.cnn);
+            SqlCommand command = new($"SELECT TOP 5 username, wpm, accuracy FROM FlashTyperUsers ORDER BY wpm DESC;", context.Cnn);
 
             dataReader = command.ExecuteReader();
 
@@ -70,7 +70,7 @@ namespace FlashTyperLibrary.Logic
             }
 
             command.Dispose();
-            context.cnn.Close();
+            context.Cnn.Close();
 
             return users;
         }
@@ -82,9 +82,9 @@ namespace FlashTyperLibrary.Logic
 
             string _password = Hash.HashPassword(password);
 
-            context.cnn.Open();
+            context.Cnn.Open();
 
-            SqlCommand command = new($"SELECT username, password FROM FlashTyperUsers WHERE username = '{username}' AND password = '{_password}';", context.cnn);
+            SqlCommand command = new($"SELECT username, password FROM FlashTyperUsers WHERE username = '{username}' AND password = '{_password}';", context.Cnn);
 
             dataReader = command.ExecuteReader();
 
@@ -101,7 +101,7 @@ namespace FlashTyperLibrary.Logic
             }
             
             command.Dispose();
-            context.cnn.Close();
+            context.Cnn.Close();
 
             return false;
         }
@@ -114,9 +114,9 @@ namespace FlashTyperLibrary.Logic
             FlashTyperContext context = new();
             SqlDataReader dataReader;
 
-            context.cnn.Open();
+            context.Cnn.Open();
 
-            SqlCommand command = new($"SELECT wpm, accuracy FROM FlashTyperUsers WHERE username = '{username}';", context.cnn);
+            SqlCommand command = new($"SELECT wpm, accuracy FROM FlashTyperUsers WHERE username = '{username}';", context.Cnn);
 
             dataReader = command.ExecuteReader();
 
@@ -127,7 +127,7 @@ namespace FlashTyperLibrary.Logic
             }
 
             command.Dispose();
-            context.cnn.Close();
+            context.Cnn.Close();
 
             return new UserModel
             {

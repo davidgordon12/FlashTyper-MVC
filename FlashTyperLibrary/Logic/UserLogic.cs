@@ -55,7 +55,7 @@ namespace FlashTyperLibrary.Logic
 
             context.cnn.Open();
 
-            SqlCommand command = new($"SELECT TOP 5 username, wpm FROM FlashTyperUsers ORDER BY wpm DESC;", context.cnn);
+            SqlCommand command = new($"SELECT TOP 5 username, wpm, accuracy FROM FlashTyperUsers ORDER BY wpm DESC;", context.cnn);
 
             dataReader = command.ExecuteReader();
 
@@ -64,7 +64,8 @@ namespace FlashTyperLibrary.Logic
                 users.Add(new UserModel
                 {
                     Username = dataReader.GetString(0),
-                    WPM = dataReader.GetInt32(1)
+                    WPM = dataReader.GetInt32(1),
+                    Accuracy = dataReader.GetDouble(2)
                 });
             }
 
@@ -105,28 +106,35 @@ namespace FlashTyperLibrary.Logic
             return false;
         }
 
-        public static int GetWPM(string username)
+        public static UserModel GetStats(string username)
         {
             int wpm = 0;
+            double accuracy = 0;
 
             FlashTyperContext context = new();
             SqlDataReader dataReader;
 
             context.cnn.Open();
 
-            SqlCommand command = new($"SELECT wpm FROM FlashTyperUsers WHERE username = '{username}';", context.cnn);
+            SqlCommand command = new($"SELECT wpm, accuracy FROM FlashTyperUsers WHERE username = '{username}';", context.cnn);
 
             dataReader = command.ExecuteReader();
 
             while (dataReader.Read())
             {
                 wpm = dataReader.GetInt32(0);
+                accuracy = dataReader.GetDouble(1);
             }
 
             command.Dispose();
             context.cnn.Close();
 
-            return wpm;
+            return new UserModel
+            {
+                Username = username,
+                WPM = wpm,
+                Accuracy = accuracy
+            };
         }
     }
 }

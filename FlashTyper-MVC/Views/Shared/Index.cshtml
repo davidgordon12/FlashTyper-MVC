@@ -22,11 +22,11 @@
 <form id="gameForm" method="post" asp-action="Submit" asp-controller="Home">
     <div class="text-center">
         <h1 class="display-4 text-light font-weight-bold">FlashTyper</h1>
-        <textarea asp-for="words" style="resize:none" readonly="readonly" class="text-decoration-none bg-secondary text-white-50 m-5 border-0 text-primary" id="wordsToType"></textarea>
+        <textarea asp-for="Words" style="resize:none" readonly="readonly" class="font-weight-bold text-decoration-none text-center bg-secondary text-white-50 m-5 border-0 text-primary" id="wordsToType"></textarea>
         <br />
-        <input asp-for="input" onkeydown="update()" type="text" class="text-decoration-none bg-secondary text-white-50 m-5 border-0 text-primary" id="txtInput" autocomplete="off" placeholder="Type to start..." />
+        <input asp-for="Input" onkeydown="update()" type="text" class="text-decoration-none bg-secondary text-white-50 m-5 border-0 text-primary" id="txtInput" autocomplete="off" placeholder="Type to start..." />
         <button onclick="window.location.reload()" type="reset" class="bg-secondary text-white-50 m-5 border-0 text-primary">reset</button>
         <p class="text-white-50" id="timer"> 20 </p>
-        <h5 class="text-white-50" id="wpm">@ViewBag.WPM WPM</h5>
+        <h5 class="text-white-50" id="wpm">Login for score submissions</h5>
     </div>
 </form>

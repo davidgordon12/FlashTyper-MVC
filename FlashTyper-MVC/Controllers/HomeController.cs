@@ -24,6 +24,11 @@ namespace FlashTyper_MVC.Controllers
             return View();
         }
 
+        public IActionResult About()
+        {
+            return View();
+        }
+
         public IActionResult Leaderboards()
         {
             //Get the current top 5 users with highest WPM
@@ -38,7 +43,9 @@ namespace FlashTyper_MVC.Controllers
             {
                 var user = JsonConvert.DeserializeObject<FlashTyper_MVC.Models.UserModel>(HttpContext.Session.GetString("UserSession"));
 
-                FlashTyperLibrary.Model.UserModel userModel = new() { Username = user.Username, WPM = UserLogic.GetWPM(user.Username) };
+                var stats = UserLogic.GetStats(user.Username);
+
+                FlashTyperLibrary.Model.UserModel userModel = new() { Username = stats.Username, WPM = stats.WPM, Accuracy = stats.Accuracy};
 
                 ViewBag.Username = user.Username;
 
@@ -53,20 +60,22 @@ namespace FlashTyper_MVC.Controllers
         [HttpPost]
         public IActionResult Submit(GameModel gameModel)
         {
-            int wpm = GameLogic.CalculateWPM(gameModel.input);
+            int wpm = GameLogic.CalculateWPM(gameModel.Input);
+            float acc = GameLogic.CalculateAccuracy(gameModel.Input.ToLower(), gameModel.Words.ToLower());
             ViewBag.WPM = wpm;
+            ViewBag.ACC = acc;
 
             try
             {
                 var user = JsonConvert.DeserializeObject<FlashTyper_MVC.Models.UserModel>(HttpContext.Session.GetString("UserSession"));
 
-                GameLogic.UpdateWPM(user.Username, wpm);
+                GameLogic.UpdateStats(user.Username, wpm, acc);
 
-                return View("Index");
+                return View("Score", new FlashTyperLibrary.Model.UserModel { Username = user.Username, WPM = wpm, Accuracy = acc });
             }
             catch(ArgumentNullException)
-            { 
-                return View("Index"); 
+            {
+                return View("Score", new FlashTyperLibrary.Model.UserModel { Username = "Login to save", WPM = wpm, Accuracy = acc });
             }
         }
 

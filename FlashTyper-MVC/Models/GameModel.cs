@@ -7,7 +7,7 @@ namespace FlashTyper_MVC.Models
 {
     public class GameModel
     {
-        public string input { get; set; }
-        public string words { get; set; }
+        public string Input { get; set; }
+        public string Words { get; set; }
     }
 }

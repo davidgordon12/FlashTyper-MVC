@@ -22,7 +22,7 @@ namespace FlashTyperLibrary
                 password: password,
                 salt: salt,
                 prf: KeyDerivationPrf.HMACSHA256,
-                iterationCount: 1,
+                iterationCount: 1, // do more than one iteration in production!
                 numBytesRequested: 256 / 8));
 
             return hashed;

@@ -1,11 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Serilog;
 
 namespace FlashTyper_MVC
 {
@@ -13,6 +8,14 @@ namespace FlashTyper_MVC
     {
         public static void Main(string[] args)
         {
+            Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Information()
+            .WriteTo.Console()
+            .WriteTo.Debug()
+            .CreateLogger();
+
+            Log.Information("Logger created. Starting web host");
+
             CreateHostBuilder(args).Build().Run();
         }
 

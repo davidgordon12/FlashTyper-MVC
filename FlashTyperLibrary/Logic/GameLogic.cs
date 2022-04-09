@@ -13,7 +13,7 @@ namespace FlashTyperLibrary.Logic
                 return 0;
             }
 
-            return (int)Math.Round(((input.Trim().Length / 5) / 0.33));
+            return (int)Math.Round((input.Trim().Length / 5) / 0.33);
         }
 
         public static float CalculateAccuracy(string input, string words)
@@ -48,42 +48,38 @@ namespace FlashTyperLibrary.Logic
             }
 
             FlashTyperContext context = new();
-            SqlDataReader dataReader;
-            SqlDataAdapter adapter = new();
-            SqlCommand command;
 
             int _wpm = 0;
 
-            context.Cnn.Open();
-
-            // check if new WPM is greater than previous score
-
-            command = new($"SELECT wpm FROM FlashTyperUsers WHERE username = '{username}'", context.Cnn);
-
-            dataReader = command.ExecuteReader();
-
-            while (dataReader.Read())
+            using (var ctx = context.Cnn)
             {
-                _wpm = dataReader.GetInt32(0);
-            }
+                SqlDataReader dataReader;
+                SqlDataAdapter adapter = new();
+                SqlCommand command;
 
-            command.Dispose();
-            dataReader.Close();
+                ctx.Open();
 
-            if (_wpm < wpm)
-            {
-                command = new($"UPDATE FlashTyperUsers SET wpm = '{wpm}', accuracy = '{acc}' WHERE username = '{username}'", context.Cnn);
+                // check if new WPM is greater than previous score
 
-                adapter.InsertCommand = command;
-                adapter.InsertCommand.ExecuteNonQuery();
+                command = new($"SELECT wpm FROM FlashTyperUsers WHERE username = '{username}'", context.Cnn);
+
+                dataReader = command.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    _wpm = dataReader.GetInt32(0);
+                }
 
                 command.Dispose();
-                context.Cnn.Close();
-            }
-            else
-            {
-                command.Dispose();
-                context.Cnn.Close();
+                dataReader.Close();
+
+                if (_wpm < wpm)
+                {
+                    command = new($"UPDATE FlashTyperUsers SET wpm = '{wpm}', accuracy = '{acc}' WHERE username = '{username}'", context.Cnn);
+
+                    adapter.InsertCommand = command;
+                    adapter.InsertCommand.ExecuteNonQuery();
+                }
             }
         }
     }

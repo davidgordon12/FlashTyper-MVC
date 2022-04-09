@@ -27,7 +27,7 @@ namespace FlashTyperLibrary.Logic
                 SqlCommand command = new()
                 {
                     Connection = context.Cnn,
-                    CommandText= "INSERT INTO FlashTyperUsers (username, password) VALUES ('{username}', '{_password}')"
+                    CommandText= $"INSERT INTO FlashTyperUsers (username, password) VALUES ('{username}', '{_password}')"
                 };
 
                 adapter.InsertCommand = command;

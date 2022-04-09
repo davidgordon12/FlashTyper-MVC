@@ -8,7 +8,7 @@ namespace FlashTyperLibrary.Logic
     {
         public static int CalculateWPM(string input)
         {
-            if(input is null)
+            if (input is null)
             {
                 return 0;
             }
@@ -42,7 +42,7 @@ namespace FlashTyperLibrary.Logic
         public static void UpdateStats(string username, int wpm, float acc)
         {
             // only submit scores with accuracy > 95%
-            if(acc < 95)
+            if (acc < 95)
             {
                 return;
             }
@@ -53,17 +53,18 @@ namespace FlashTyperLibrary.Logic
 
             using (var ctx = context.Cnn)
             {
-                SqlDataReader dataReader;
-                SqlDataAdapter adapter = new();
                 SqlCommand command;
-
                 ctx.Open();
 
                 // check if new WPM is greater than previous score
 
-                command = new($"SELECT wpm FROM FlashTyperUsers WHERE username = '{username}'", context.Cnn);
+                command = new()
+                {
+                    Connection = context.Cnn,
+                    CommandText = $"SELECT wpm FROM FlashTyperUsers WHERE username = '{username}'"
+                };
 
-                dataReader = command.ExecuteReader();
+                SqlDataReader dataReader = command.ExecuteReader();
 
                 while (dataReader.Read())
                 {
@@ -75,9 +76,17 @@ namespace FlashTyperLibrary.Logic
 
                 if (_wpm < wpm)
                 {
-                    command = new($"UPDATE FlashTyperUsers SET wpm = '{wpm}', accuracy = '{acc}' WHERE username = '{username}'", context.Cnn);
+                    command = new()
+                    {
+                        Connection = context.Cnn,
+                        CommandText = $"UPDATE FlashTyperUsers SET wpm = '{wpm}', accuracy = '{acc}' WHERE username = '{username}'"
+                    };
 
-                    adapter.InsertCommand = command;
+                    SqlDataAdapter adapter = new()
+                    {
+                        InsertCommand = command,
+                    };
+
                     adapter.InsertCommand.ExecuteNonQuery();
                 }
             }

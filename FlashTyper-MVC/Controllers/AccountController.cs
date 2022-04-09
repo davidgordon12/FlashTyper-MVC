@@ -33,9 +33,9 @@ namespace FlashTyper_MVC.Controllers
         {
             if (UserLogic.ValidLogin(user.Username, user.Password))
             {
-                Log.Information("User '{0}' logged in at {1}", user.Username, DateTime.Now);
-
                 HttpContext.Session.SetString("UserSession", JsonConvert.SerializeObject(user));
+
+                Log.Information("User '{0}' logged in at {1}", user.Username, DateTime.Now);
 
                 return View("Index");
             }

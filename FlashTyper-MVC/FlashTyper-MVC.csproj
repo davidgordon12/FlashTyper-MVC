@@ -4,7 +4,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>FlashTyper_MVC</RootNamespace>
     <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
-    <ApplicationIcon>wwwroot\favicon.ico</ApplicationIcon>
+    <ApplicationIcon>wwwroot\bolt.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>

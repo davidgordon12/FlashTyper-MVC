@@ -10,6 +10,7 @@ namespace FlashTyper_MVC
         {
             Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Information()
+            .WriteTo.Console()
             .WriteTo.Debug()
             .CreateLogger();
 
